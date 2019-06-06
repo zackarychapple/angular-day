@@ -1,8 +1,5 @@
 <div style="text-align:center">
-  <h1>Welcome to angular-day!</h1>
-  <img
-    width="450"
-    src="https://raw.githubusercontent.com/nrwl/nx/master/nx-logo.png"
-  />
+  <h1>Welcome to angular-day... of cats!</h1>
 </div>
-<div>Message: {{ hello$ | async | json }}</div>
+<angular-day-breed-list (selectedValue)="breed = $event"></angular-day-breed-list>
+<angular-day-breed-grid [breed]="breed"></angular-day-breed-grid>

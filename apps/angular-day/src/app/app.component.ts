@@ -8,6 +8,9 @@ import { Message } from '@angular-day/api-interface';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
+  breed = '';
+  //TODO: Refactor other calls to do this
   hello$ = this.http.get<Message>('/api/hello');
+
   constructor(private http: HttpClient) {}
 }
