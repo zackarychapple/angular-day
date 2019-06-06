@@ -11,8 +11,10 @@ export class CatsService {
 
   }
 
-  async saveCatByOwner(catdto: CatDto): Promise<boolean> {
-    const saveResult = await this.catEntity.save(catdto);
-    return true
+  async saveCatByOwner(catdto: CatDto): Promise<CatDto> {
+    // TODO: make sure this is cleaned up
+    const entity = new CatEntity();
+    Object.assign(entity, catdto);
+    return await this.catEntity.save(entity);
   }
 }

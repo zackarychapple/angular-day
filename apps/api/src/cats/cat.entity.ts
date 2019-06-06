@@ -1,4 +1,4 @@
-import {Column, Entity, PrimaryGeneratedColumn} from 'typeorm';
+import {BeforeInsert, Column, Entity, PrimaryGeneratedColumn} from 'typeorm';
 
 @Entity()
 export class CatEntity {
@@ -11,6 +11,13 @@ export class CatEntity {
   @Column()
   breed: string;
 
-  @Column({nullable:true})
+  @Column({nullable: true})
   hideout: string;
+
+  @BeforeInsert()
+  inserted() {
+    if (!this.hideout) {
+      this.hideout = 'Super Secret Hideout'
+    }
+  }
 }
