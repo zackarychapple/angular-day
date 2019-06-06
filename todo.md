@@ -1,8 +1,8 @@
-- Class Transformer
-- Cat Uploader
-- Healthcheck
 - AuthN/Z
+- Guarded Cat Uploader
+- Role Based Class Transformer
 - Swagger
 - Sockets
 - Events
 - Redis Cache
+- Hystrix circuit breakers with Decorators

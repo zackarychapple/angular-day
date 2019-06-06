@@ -5,11 +5,13 @@ import {AppService} from './app.service';
 import {CatsModule} from '../cats/cats.module';
 import {TypeOrmModule} from '@nestjs/typeorm';
 import {OwnersModule} from '../owners/owners.module';
+import {HealthcheckModule} from '../healthcheck/healthcheck.module';
 
 @Module({
   imports: [
     CatsModule,
     OwnersModule,
+    HealthcheckModule,
     TypeOrmModule.forRoot({
       // These should be pulled from Env
       type: 'mysql',
