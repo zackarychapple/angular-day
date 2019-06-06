@@ -11,6 +11,10 @@ export class CatsService {
 
   }
 
+  async getCatsByOwner(onwerName: string): Promise<any> {
+    return await this.catEntity.find({where: {owner: onwerName}})
+  }
+
   async saveCatByOwner(catdto: CatDto): Promise<CatDto> {
     // TODO: make sure this is cleaned up
     const entity = new CatEntity();

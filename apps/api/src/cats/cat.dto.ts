@@ -1,4 +1,5 @@
 import {IsNotEmpty} from 'class-validator';
+import {Exclude} from 'class-transformer';
 
 export class CatDto {
   @IsNotEmpty()
@@ -6,4 +7,11 @@ export class CatDto {
 
   @IsNotEmpty()
   owner: string;
+
+  @Exclude()
+  hideout: string;
+
+  constructor(partial: Partial<CatDto>) {
+    Object.assign(this, partial);
+  }
 }
