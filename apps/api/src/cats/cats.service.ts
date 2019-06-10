@@ -50,6 +50,10 @@ export class CatsService {
     return await this.catEntity.find({where: {owner: onwerName}})
   }
 
+  async deleteCatsById(cats: Array<number>): Promise<any> {
+    return await this.catEntity.delete(cats);
+  }
+
   async saveCatByOwner(catdto: CatDto): Promise<CatDto> {
     // TODO: make sure this is cleaned up
     // TODO: Add a time based cache here with an automatic bust on new

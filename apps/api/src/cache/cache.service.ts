@@ -6,6 +6,7 @@ const redis = require("redis"),
 const {promisify} = require('util');
 
 @Injectable()
+// TODO: See if we can update this to be an actual Cache Module https://docs.nestjs.com/techniques/caching
 export class CacheService {
   NOT_CACHED = 'not cached';
 

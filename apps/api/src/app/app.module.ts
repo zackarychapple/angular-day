@@ -6,12 +6,16 @@ import {CatsModule} from '../cats/cats.module';
 import {TypeOrmModule} from '@nestjs/typeorm';
 import {OwnersModule} from '../owners/owners.module';
 import {HealthcheckModule} from '../healthcheck/healthcheck.module';
+import {UsersModule} from '../users/users.module';
+import {AuthModule} from '../auth/auth.module';
 
 @Module({
   imports: [
     CatsModule,
     OwnersModule,
     HealthcheckModule,
+    UsersModule,
+    AuthModule,
     TypeOrmModule.forRoot({
       // These should be pulled from Env
       type: 'mysql',

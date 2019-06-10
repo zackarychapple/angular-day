@@ -1,5 +1,5 @@
 import {IsNotEmpty} from 'class-validator';
-import {Exclude} from 'class-transformer';
+import {Expose} from 'class-transformer';
 
 export class CatDto {
   @IsNotEmpty()
@@ -8,7 +8,7 @@ export class CatDto {
   @IsNotEmpty()
   owner: string;
 
-  @Exclude()
+  @Expose({groups: ['admin']})
   hideout: string;
 
   constructor(partial: Partial<CatDto>) {
