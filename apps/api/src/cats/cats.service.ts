@@ -6,16 +6,16 @@ import {InjectRepository} from '@nestjs/typeorm';
 import * as fs from "fs";
 import * as path from "path";
 import {BreedDto} from './breed.dto';
-import * as https from "https";
-import {Response} from 'express';
-import {BreedSearchDto} from './breed_search.dto';
+import {request, transport} from 'popsicle';
+import {CacheService} from '../cache/cache.service';
 
 @Injectable()
 export class CatsService {
   allBreeds: Array<BreedDto>;
 
   constructor(@InjectRepository(CatEntity)
-              private readonly catEntity: Repository<CatEntity>) {
+              private readonly catEntity: Repository<CatEntity>,
+              private cache: CacheService) {
     this.allBreeds = []
   }
 
@@ -31,34 +31,19 @@ export class CatsService {
     }
   }
 
-  // TODO: Add Redis Cache and Memory cache of the responses from the breeds
-  // TODO: I dont like that I have to pass in the response
-  async getCatsByBreed(breedID: string, res: Response) {
-    const breedQuery =
-      `https://api.thecatapi.com/v1/images/search?limit=9&mime_types=&order=Random&size=small&page=0&breed_ids=${breedID}&sub_id=demo-a44f13`;
-    https.get(breedQuery, (response: any) => {
-
-        let json = '';
-        response.on('data', function (chunk) {
-          json += chunk;
-        });
-        response.on('end', function () {
-          // TODO: Add this handling back
-          // if (response.statusCode === 200) {
-          try {
-            const data: Array<BreedSearchDto> = JSON.parse(json);
-            res.json(data);
-          } catch (e) {
-            debugger
-            //   TODO: This crashes the server
-            // throw new HttpException({error: 'Error Parsing Cats'}, HttpStatus.INTERNAL_SERVER_ERROR)
-            // }
-            // } else {
-            //   throw new HttpException({error: 'Breed Not Found'}, HttpStatus.NOT_FOUND)
-          }
-        });
-      }
-    );
+  async getCatsByBreed(breedID: string) {
+    const cachedEntry = await this.cache.getLocalWithFallback(breedID);
+    if (cachedEntry === this.cache.NOT_CACHED) {
+      const breedQuery =
+        `https://api.thecatapi.com/v1/images/search?limit=9&mime_types=&order=Random&size=small&page=0&breed_ids=${breedID}&sub_id=demo-a44f13`;
+      const res = await transport()(request(breedQuery));
+      // TODO: We need to add proper handling here https://github.com/serviejs/popsicle/blob/791c68b0a340a040d3380339b60ac5f9755e0e78/src/node.spec.ts#L27
+      const breedData = await res.body.json();
+      await this.cache.setLocalWithFallback(breedID, breedData);
+      return breedData;
+    } else {
+      return cachedEntry
+    }
   }
 
   async getCatsByOwner(onwerName: string): Promise<any> {
@@ -67,6 +52,7 @@ export class CatsService {
 
   async saveCatByOwner(catdto: CatDto): Promise<CatDto> {
     // TODO: make sure this is cleaned up
+    // TODO: Add a time based cache here with an automatic bust on new
     const entity = new CatEntity();
     Object.assign(entity, catdto);
     return await this.catEntity.save(entity);

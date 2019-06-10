@@ -1,5 +1,4 @@
-import {Body, Catch, Controller, Get, HttpException, HttpStatus, Param, Post, Res} from '@nestjs/common';
-import {Response} from 'express';
+import {Body, Catch, Controller, Get, HttpException, HttpStatus, Param, Post} from '@nestjs/common';
 import {CatDto} from './cat.dto';
 import {CatsService} from './cats.service';
 
@@ -26,8 +25,7 @@ export class CatsController {
   }
 
   @Get('/:breedID')
-  async getBreed(@Param('breedID') breedID: string, @Res() res: Response) {
-
-    return await this.catsService.getCatsByBreed(breedID, res);
+  async getBreed(@Param('breedID') breedID: string) {
+    return await this.catsService.getCatsByBreed(breedID);
   }
 }
