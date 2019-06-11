@@ -62,7 +62,7 @@ export class CatsService {
     // TODO: Add a time based cache here with an automatic bust on new
     const entity = new CatEntity();
     Object.assign(entity, catdto);
-    const blah = await this.commandBus.execute(
+    await this.commandBus.execute(
       new AcquiredCatCommand(catdto)
     );
     return await this.catEntity.save(entity);

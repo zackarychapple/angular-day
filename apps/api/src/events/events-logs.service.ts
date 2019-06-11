@@ -5,7 +5,6 @@ import {AcquiredCatEvent} from '../cats/acquired-cat.event';
 @Injectable()
 export class EventsLogsService {
   cats: Observable<any>;
-  // catsSubject: BehaviorSubject<[AcquiredCatEvent] | []> = new BehaviorSubject([]);
   catsSubject = new ReplaySubject(10); // TODO: Add a type here
   userCount: Observable<number>;
   userCountSubject: BehaviorSubject<number> = new BehaviorSubject(0);
@@ -16,9 +15,6 @@ export class EventsLogsService {
   }
 
   catMovement(event: AcquiredCatEvent) {
-    // const currentCats: any = this.catsSubject.value;
-    // currentCats.unshift(event);
-    // TODO: Cut this to 10 if over
     this.catsSubject.next(event);
   }
 

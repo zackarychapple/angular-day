@@ -18,7 +18,7 @@ export class EventsGateway {
   handleConnection(client) {
     this.wsClients.push(client);
     this.eventLogs.incrementUser();
-    this.broadcast('connected',{});
+    this.broadcast('connected', {});
     Logger.log('Client Connected to Socket');
   }
 
@@ -37,14 +37,13 @@ export class EventsGateway {
 
   private broadcast(event, message: any) {
     for (const c of this.wsClients) {
-      const blah = this.handleEvent(c, message);
+      c.emit(event, message);
     }
   }
 
   @SubscribeMessage('events')
   handleEvent(client, data: any): WsResponse<any> {
     const event = 'events';
-    Logger.log('Event Received: ' + JSON.stringify(data));
     return {event, data};
   }
 
