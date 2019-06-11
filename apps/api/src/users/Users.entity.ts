@@ -14,4 +14,7 @@ export class UsersEntity {
 
   @Column({nullable: false, default: ''})
   password: string;
+
+  @Column({nullable: false, default: 'self'})
+  identityProvider: string;
 }

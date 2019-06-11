@@ -15,4 +15,7 @@ export class CreateUserDto {
   @ApiModelProperty()
   @Exclude()
   password: string;
+
+  @Exclude()
+  identityProvider:string;
 }

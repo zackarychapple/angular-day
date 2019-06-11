@@ -20,7 +20,9 @@ export class UsersService {
 
   async createUser(userDto: CreateUserDto) {
     const userEntity = new UsersEntity();
+    // TODO: Clean this up
     userEntity.username = userDto.username;
+    userEntity.identityProvider = userDto.identityProvider;
     userEntity.password = await this.crypto.hashPassword(userDto.password);
     const userRoles: Array<RoleEntity> = [];
     userDto.roles.forEach((role) => {
