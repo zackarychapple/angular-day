@@ -1,4 +1,4 @@
-import {Injectable} from '@nestjs/common';
+import {Injectable, Logger} from '@nestjs/common';
 import {CatDto} from './cat.dto';
 import {CatEntity} from './cat.entity';
 import {Repository} from 'typeorm';
@@ -10,6 +10,7 @@ import {request, transport} from 'popsicle';
 import {CacheService} from '../cache/cache.service';
 import {CommandBus} from '@nestjs/cqrs';
 import {AcquiredCatCommand} from './acquired-cat.command';
+import {CircuitBreakerProtected} from 'nest-circuitbreaker';
 
 @Injectable()
 export class CatsService {
@@ -49,8 +50,18 @@ export class CatsService {
     }
   }
 
+  // TODO: We need to update the circuit breaker to not require manual install of hysterixjs and rxjs-compat
+  @CircuitBreakerProtected({
+    timeout: 100,
+    fallbackTo: this.failCat
+  })
   async getCatsByOwner(onwerName: string): Promise<any> {
     return await this.catEntity.find({where: {owner: onwerName}})
+  }
+
+  async failCat(ownerName: string){
+    Logger.log(ownerName);
+    return ownerName;
   }
 
   async deleteCatsById(cats: Array<number>): Promise<any> {
