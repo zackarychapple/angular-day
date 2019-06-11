@@ -8,12 +8,14 @@ import {OwnersModule} from '../owners/owners.module';
 import {HealthcheckModule} from '../healthcheck/healthcheck.module';
 import {UsersModule} from '../users/users.module';
 import {AuthModule} from '../auth/auth.module';
+import {EventsModule} from '../events/events.module';
 
 @Module({
   imports: [
     CatsModule,
     OwnersModule,
     HealthcheckModule,
+    EventsModule,
     UsersModule,
     AuthModule,
     TypeOrmModule.forRoot({

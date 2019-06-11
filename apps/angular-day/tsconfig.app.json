@@ -5,8 +5,6 @@
     "types": []
   },
   "include": ["**/*.ts"],
-  "exclude": ["src/test-setup.ts", "**/*.spec.ts"],
-  "angularCompilerOptions": {
-    "enableIvy": true
-  }
+  "exclude": ["src/test-setup.ts", "**/*.spec.ts"]
 }
+// TODO: Re-enable ivy after https://github.com/rodgc/ngx-socket-io/pull/31 lands

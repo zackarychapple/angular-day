@@ -15,6 +15,9 @@ import {LoginComponent} from './login/login.component';
 import {RouterModule, Routes} from '@angular/router';
 import {HomeComponent} from './home/home.component';
 import {AuthService} from './auth.service';
+import {SocketIoModule} from 'ngx-socket-io';
+import { CatFeedComponent } from './cat-feed/cat-feed.component';
+import {CatFeedService} from './cat-feed/cat-feed.service';
 
 const MATERIAL_MODULES = [
   MatGridListModule,
@@ -22,11 +25,12 @@ const MATERIAL_MODULES = [
 ];
 
 const appRoutes: Routes = [
-  {path: '', component: HomeComponent}
+  {path: '', component: HomeComponent},
+  {path: '**', redirectTo: '', pathMatch: 'full' },
 ];
 
 @NgModule({
-  declarations: [AppComponent, BreedListComponent, BreedGridComponent, LoginComponent, HomeComponent],
+  declarations: [AppComponent, BreedListComponent, BreedGridComponent, LoginComponent, HomeComponent, CatFeedComponent],
   imports: [
     BrowserModule,
     RouterModule.forRoot(appRoutes),
@@ -34,10 +38,14 @@ const appRoutes: Routes = [
     AngularFireAuthModule,
     HttpClientModule,
     BrowserAnimationsModule,
-    ...MATERIAL_MODULES
+    ...MATERIAL_MODULES,
+    SocketIoModule.forRoot({
+      url: 'http://localhost:3333',
+    }),
   ],
-  providers: [AuthService],
+  providers: [AuthService, CatFeedService],
   bootstrap: [AppComponent]
 })
 export class AppModule {
+  constructor(){}
 }
