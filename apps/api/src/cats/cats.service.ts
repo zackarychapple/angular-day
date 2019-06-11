@@ -8,6 +8,8 @@ import * as path from "path";
 import {BreedDto} from './breed.dto';
 import {request, transport} from 'popsicle';
 import {CacheService} from '../cache/cache.service';
+import {CommandBus} from '@nestjs/cqrs';
+import {AcquiredCatCommand} from './acquired-cat.command';
 
 @Injectable()
 export class CatsService {
@@ -15,6 +17,7 @@ export class CatsService {
 
   constructor(@InjectRepository(CatEntity)
               private readonly catEntity: Repository<CatEntity>,
+              private readonly commandBus: CommandBus,
               private cache: CacheService) {
     this.allBreeds = []
   }
@@ -59,6 +62,9 @@ export class CatsService {
     // TODO: Add a time based cache here with an automatic bust on new
     const entity = new CatEntity();
     Object.assign(entity, catdto);
+    const blah = await this.commandBus.execute(
+      new AcquiredCatCommand(catdto)
+    );
     return await this.catEntity.save(entity);
   }
 }

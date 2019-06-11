@@ -9,14 +9,15 @@ import {CatFeedService} from './cat-feed.service';
 export class CatFeedComponent implements OnInit {
 
   constructor(private catFeedService: CatFeedService) {
+    this.catFeedService.getCatEvent().subscribe(cats => {
+      // TODO: Print this feed on the screen
+      debugger
+      console.log(cats);
+    })
   }
 
   ngOnInit() {
-    this.catFeedService.sendCat('omg');
-    this.catFeedService.getCatEvent().subscribe(cats => {
-      // TODO: Print this feed on the screen
-      console.log(cats);
-    })
+    // this.catFeedService.sendCat('omg');
   }
 
 }

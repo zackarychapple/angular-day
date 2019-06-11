@@ -7,24 +7,42 @@ import {EventsLogsService} from './events-logs.service';
 export class EventsGateway {
   @WebSocketServer()
   server: Server;
+  wsClients = [];
 
   constructor(private eventLogs: EventsLogsService) {
-
+    this.eventLogs.cats.subscribe((catEvent) => {
+      this.broadcast('events', catEvent)
+    })
   }
 
-  handleConnection() {
+  handleConnection(client) {
+    this.wsClients.push(client);
     this.eventLogs.incrementUser();
+    this.broadcast('connected',{});
     Logger.log('Client Connected to Socket');
   }
 
-  handleDisconnect() {
+  handleDisconnect(client) {
+    for (let i = 0; i < this.wsClients.length; i++) {
+      if (this.wsClients[i] === client) {
+        this.wsClients.splice(i, 1);
+        break;
+      }
+    }
+    this.broadcast('disconnect', {});
+
     this.eventLogs.decrementUser();
     Logger.log('Client Disconnected to Socket');
   }
 
+  private broadcast(event, message: any) {
+    for (const c of this.wsClients) {
+      const blah = this.handleEvent(c, message);
+    }
+  }
 
   @SubscribeMessage('events')
-  onEvent(client, data: any): WsResponse<any> {
+  handleEvent(client, data: any): WsResponse<any> {
     const event = 'events';
     Logger.log('Event Received: ' + JSON.stringify(data));
     return {event, data};
