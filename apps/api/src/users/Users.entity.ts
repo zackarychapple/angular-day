@@ -1,4 +1,4 @@
-import {Entity, JoinTable, ManyToMany, PrimaryColumn} from 'typeorm';
+import {Column, Entity, JoinTable, ManyToMany, PrimaryColumn} from 'typeorm';
 import {RoleEntity} from './Role.entity';
 
 // TODO: Find out why this cant be users.entity.ts
@@ -11,4 +11,7 @@ export class UsersEntity {
   @ManyToMany(type => RoleEntity, role => role.name, {cascade: ["update"]})
   @JoinTable()
   roles: Array<RoleEntity>;
+
+  @Column({nullable: false, default: ''})
+  password: string;
 }

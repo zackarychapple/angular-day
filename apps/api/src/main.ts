@@ -3,6 +3,7 @@
  * This is only a minimal backend to get started.
  **/
 import * as compression from 'compression';
+import * as helmet from 'helmet';
 import {NestFactory} from '@nestjs/core';
 
 import {AppModule} from './app/app.module';
@@ -43,6 +44,12 @@ async function bootstrap() {
   This is for using a session
   */
   app.use(expressSession(sessionConfig));
+
+  /*
+  This adds a little default security to our server
+  See https://github.com/helmetjs/helmet#how-it-works for more
+  */
+  app.use(helmet());
 
   /*
   This is the setup for swagger documentation on our application

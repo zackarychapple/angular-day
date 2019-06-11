@@ -1,4 +1,4 @@
-import {Body, Controller, Post, Req} from '@nestjs/common';
+import {Body, Controller, HttpStatus, Post, Req} from '@nestjs/common';
 import {AuthService} from './auth.service';
 import {LoginDto} from '../users/login.dto';
 import {RequestWithSession} from '../common/RequestWithSession';
@@ -9,9 +9,13 @@ export class AuthController {
   }
 
   @Post('/login')
-  login(@Body() loginDto: LoginDto, @Req() req: RequestWithSession) {
-    const token = this.authService.signIn(loginDto);
-    req.session.token = token;
-    return token;
+  async login(@Body() loginDto: LoginDto, @Req() req: RequestWithSession) {
+    const token = await this.authService.signIn(loginDto);
+    if (token === this.authService.NOT_AUTHORIZED) {
+      return HttpStatus.UNAUTHORIZED
+    } else {
+      req.session.token = token;
+      return token;
+    }
   }
 }

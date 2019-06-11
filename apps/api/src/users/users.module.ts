@@ -4,6 +4,7 @@ import {TypeOrmModule} from '@nestjs/typeorm';
 import {UsersController} from './users.controller';
 import {UsersEntity} from './Users.entity';
 import {RoleEntity} from './Role.entity';
+import {CryptService} from '../crypt/crypt.service';
 
 @Module({
   imports: [
@@ -14,7 +15,7 @@ import {RoleEntity} from './Role.entity';
     UsersController,
   ],
   providers: [
-    UsersService,
+    UsersService, CryptService
   ],
   exports: [
     UsersService,

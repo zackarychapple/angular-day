@@ -4,6 +4,7 @@ import {Repository} from 'typeorm';
 import {CreateUserDto} from './user.dto';
 import {RoleEntity} from './Role.entity';
 import {UsersEntity} from './Users.entity';
+import {CryptService} from '../crypt/crypt.service';
 
 @Injectable()
 export class UsersService {
@@ -11,7 +12,8 @@ export class UsersService {
     @InjectRepository(UsersEntity)
     private readonly userEntity: Repository<UsersEntity>,
     @InjectRepository(RoleEntity)
-    private readonly roleEntity: Repository<RoleEntity>
+    private readonly roleEntity: Repository<RoleEntity>,
+    private crypto: CryptService
   ) {
 
   }
@@ -19,7 +21,7 @@ export class UsersService {
   async createUser(userDto: CreateUserDto) {
     const userEntity = new UsersEntity();
     userEntity.username = userDto.username;
-
+    userEntity.password = await this.crypto.hashPassword(userDto.password);
     const userRoles: Array<RoleEntity> = [];
     userDto.roles.forEach((role) => {
       const re = new RoleEntity();

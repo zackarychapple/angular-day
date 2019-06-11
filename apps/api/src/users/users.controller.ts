@@ -1,6 +1,7 @@
 import {Body, Catch, Controller, Get, HttpException, HttpStatus, Param, Post} from '@nestjs/common';
 import {UsersService} from './users.service';
 import {CreateUserDto} from './user.dto';
+import {plainToClass} from 'class-transformer';
 
 @Catch()
 @Controller('users')
@@ -12,7 +13,7 @@ export class UsersController {
   async getUser(@Param('username')username: string) {
     const fetchedUser = await this.usersService.findByUsername(username);
     if (fetchedUser) {
-      return fetchedUser;
+      return plainToClass(CreateUserDto, fetchedUser);
     } else {
       throw new HttpException({error: 'User Not Found'}, HttpStatus.NOT_FOUND);
     }
