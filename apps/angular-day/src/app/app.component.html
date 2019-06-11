@@ -4,13 +4,17 @@
 
 <div *ngIf="afAuth.user | async as user; else showLogin">
   <h1>Hello {{ user.displayName }}!</h1>
-  <button (click)="logout()">Logout</button>
+  <a mat-raised-button (click)="logout()">
+    Logout
+  </a>
+  <router-outlet></router-outlet>
+  <angular-day-breed-list (selectedValue)="breed = $event"></angular-day-breed-list>
+  <angular-day-breed-grid [breed]="breed"></angular-day-breed-grid>
 </div>
 <ng-template #showLogin>
   <p>Please login.</p>
-  <button (click)="login()">Login with Google</button>
+  <a mat-raised-button (click)="login()" class="login">
+    <img src="../assets/google_icon_transparent.png">
+    Sign In With Google
+  </a>
 </ng-template>
-
-<router-outlet></router-outlet>
-<angular-day-breed-list (selectedValue)="breed = $event"></angular-day-breed-list>
-<angular-day-breed-grid [breed]="breed"></angular-day-breed-grid>

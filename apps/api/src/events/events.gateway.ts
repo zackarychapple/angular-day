@@ -2,6 +2,8 @@ import {SubscribeMessage, WebSocketGateway, WebSocketServer, WsResponse,} from '
 import {Server} from 'socket.io';
 import {Logger} from '@nestjs/common';
 import {EventsLogsService} from './events-logs.service';
+import {plainToClass} from 'class-transformer';
+import {CatDto} from '../cats/cat.dto';
 
 @WebSocketGateway({origins: '*:*'})
 export class EventsGateway {
@@ -11,7 +13,10 @@ export class EventsGateway {
 
   constructor(private eventLogs: EventsLogsService) {
     this.eventLogs.cats.subscribe((catEvent) => {
-      this.broadcast('events', catEvent)
+      const newCat = plainToClass(CatDto, catEvent.cat.cat);
+      // TODO: Get rid of this hack when i restructure breed
+      newCat.breed = JSON.parse(newCat.breed);
+      this.broadcast('events', newCat)
     })
   }
 

@@ -7,7 +7,7 @@ import {BreedListComponent} from './breed-list/breed-list.component';
 import {BreedGridComponent} from './breed-grid/breed-grid.component';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {MatGridListModule} from '@angular/material/grid-list';
-import {MatSelectModule} from '@angular/material';
+import {MatButtonModule, MatCardModule, MatListModule, MatSelectModule} from '@angular/material';
 import {environment} from '../environments/environment';
 import {AngularFireModule} from '@angular/fire';
 import {AngularFireAuthModule} from '@angular/fire/auth';
@@ -21,7 +21,10 @@ import {CatFeedService} from './cat-feed/cat-feed.service';
 
 const MATERIAL_MODULES = [
   MatGridListModule,
-  MatSelectModule
+  MatSelectModule,
+  MatButtonModule,
+  MatCardModule,
+  MatListModule
 ];
 
 const appRoutes: Routes = [

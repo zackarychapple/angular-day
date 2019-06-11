@@ -1,0 +1,31 @@
+{
+  "uid": "MeACAhMUQzN0ATaD5k48MLxbzi23",
+  "displayName": "ngAtlanta",
+  "photoURL": "https://lh5.googleusercontent.com/-SaOq39d6jQ0/AAAAAAAAAAI/AAAAAAAAAPQ/PzDTtW3bMZg/photo.jpg",
+  "email": "zack@ng-atl.org",
+  "emailVerified": true,
+  "phoneNumber": null,
+  "isAnonymous": false,
+  "providerData": [
+    {
+      "uid": "115352991193236200920",
+      "displayName": "ngAtlanta",
+      "photoURL": "https://lh5.googleusercontent.com/-SaOq39d6jQ0/AAAAAAAAAAI/AAAAAAAAAPQ/PzDTtW3bMZg/photo.jpg",
+      "email": "zack@ng-atl.org",
+      "phoneNumber": null,
+      "providerId": "google.com"
+    }
+  ],
+  "apiKey": "AIzaSyDZt9phCKTxnUCM0OMN8zP3luQY24y_HIE",
+  "appName": "[DEFAULT]",
+  "authDomain": "angular-day.firebaseapp.com",
+  "stsTokenManager": {
+    "apiKey": "AIzaSyDZt9phCKTxnUCM0OMN8zP3luQY24y_HIE",
+    "refreshToken": "AEu4IL0tLbb4c_OKVGGfeSuX1iCOYgXQp9_JLR9wJGNN4wA4raMqKmVDVA7w2G9F1K3tGvx72SNh4DfkW9n2DI-uvXVc0-wz_lALQqLgl98tx9ITrl0QyWw90KhAuV4E8xYjloqodR9tfDrzB8Dx4BDLA9VI_QjbqleJQXiKmoaQw0vctU4Ij5C7ye9D25AGJHjaAl7sUZZNRREoyy3lh1vaPVhHM7sBxadT4LfH6jov7eHrjqIty6XGWH4y11TFI-hzBuKvB-88o_XsEEXaqsIFe1zj4q0lJpuJMtH9oaaW7s-63Z4WvrWgqeskk4_INk_N9OL2KmWG5rHK-iETdOndQB_NXny4bA",
+    "accessToken": "eyJhbGciOiJSUzI1NiIsImtpZCI6IjU0OGYzZjk4N2IxNzMxOWZlZDhjZDc2ODNmNTIyNWEyOTY0YzY5OWQiLCJ0eXAiOiJKV1QifQ.eyJuYW1lIjoibmdBdGxhbnRhIiwicGljdHVyZSI6Imh0dHBzOi8vbGg1Lmdvb2dsZXVzZXJjb250ZW50LmNvbS8tU2FPcTM5ZDZqUTAvQUFBQUFBQUFBQUkvQUFBQUFBQUFBUFEvUHpEVHRXM2JNWmcvcGhvdG8uanBnIiwiaXNzIjoiaHR0cHM6Ly9zZWN1cmV0b2tlbi5nb29nbGUuY29tL2FuZ3VsYXItZGF5IiwiYXVkIjoiYW5ndWxhci1kYXkiLCJhdXRoX3RpbWUiOjE1NjAyNzk1NTUsInVzZXJfaWQiOiJNZUFDQWhNVVF6TjBBVGFENWs0OE1MeGJ6aTIzIiwic3ViIjoiTWVBQ0FoTVVRek4wQVRhRDVrNDhNTHhiemkyMyIsImlhdCI6MTU2MDI3OTU1NSwiZXhwIjoxNTYwMjgzMTU1LCJlbWFpbCI6InphY2tAbmctYXRsLm9yZyIsImVtYWlsX3ZlcmlmaWVkIjp0cnVlLCJmaXJlYmFzZSI6eyJpZGVudGl0aWVzIjp7Imdvb2dsZS5jb20iOlsiMTE1MzUyOTkxMTkzMjM2MjAwOTIwIl0sImVtYWlsIjpbInphY2tAbmctYXRsLm9yZyJdfSwic2lnbl9pbl9wcm92aWRlciI6Imdvb2dsZS5jb20ifX0.uODghFOSCYXAAQNCbJ4BstmvsVb2AX1TYkx2zVwwrSUMsJJq_-BHjlhrn2l4IOK3eBz25U4wkbqhLG2fvrUt1I8hKSthPpfybimBXxMZQx4JV0DrJOehl03XXAPMDrV_cDujWRqVnbpwfe6KcOw-CxPBDiptlbttA4PKmDGcj-EIkKyA5_lNa1l6EiZpYbRCG3-kLY40qlx5uPJfiry0HPOHRWWNQiY9cDcX8UEF_aCn9GRC0uKHoAMi30qNqvFIB6VUfkF8nOoPvrMq89v4vLPUeeAACwJF6jwb9K5TwNxBCmnsKzZq0G3X7cE6TVg7FvHEGul96AEIhKMN_UlReg",
+    "expirationTime": 1560283138459
+  },
+  "redirectEventId": null,
+  "lastLoginAt": "1560279555688",
+  "createdAt": "1560220309755"
+}

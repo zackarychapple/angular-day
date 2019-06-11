@@ -19,8 +19,9 @@ export class UsersController {
     }
   }
 
+  // TODO: why does having CreateUserDto break this now?
   @Post('/')
-  async create(@Body() userDto: CreateUserDto) {
+  async create(@Body() userDto) {
     await this.usersService.createUser(userDto);
     return HttpStatus.OK;
   }

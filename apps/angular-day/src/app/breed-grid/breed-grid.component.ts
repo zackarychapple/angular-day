@@ -1,4 +1,4 @@
-import {Component, Input, OnChanges, OnInit, SimpleChange} from '@angular/core';
+import {Component, Input, OnChanges, SimpleChange} from '@angular/core';
 import {BreedGridService} from './breed-grid.service';
 import {BreedSearchDto} from '../../../../api/src/cats/breed_search.dto';
 
@@ -11,15 +11,19 @@ export class BreedGridComponent implements OnChanges {
   @Input()
   breed = '';
 
-  breedResults:Array<BreedSearchDto>;
+  breedResults: Array<BreedSearchDto>;
 
-  constructor(private breedGridService:BreedGridService) {
+  constructor(private breedGridService: BreedGridService) {
 
   }
 
-  ngOnChanges(changes: { [propName: string]: SimpleChange }){
-    if( changes['breed'] && changes['breed'].previousValue !== changes['breed'].currentValue && changes['breed'].currentValue !== "" ) {
-      this.breedGridService.getBreedData(this.breed).subscribe((breeddata:any)=>{
+  acquire(cat) {
+    this.breedGridService.acquireCat(cat).subscribe();
+  }
+
+  ngOnChanges(changes: { [propName: string]: SimpleChange }) {
+    if (changes['breed'] && changes['breed'].previousValue !== changes['breed'].currentValue && changes['breed'].currentValue !== "") {
+      this.breedGridService.getBreedData(this.breed).subscribe((breeddata: any) => {
         this.breedResults = breeddata;
       });
     }

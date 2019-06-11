@@ -1,4 +1,4 @@
-import {Body, Controller, HttpStatus, Post, Req} from '@nestjs/common';
+import {Body, Controller, HttpStatus, Logger, Post, Req} from '@nestjs/common';
 import {AuthService} from './auth.service';
 import {LoginDto} from '../users/login.dto';
 import {RequestWithSession} from '../common/RequestWithSession';
@@ -27,6 +27,7 @@ export class AuthController {
   @Post('/thirdPartyLogin')
   async thirdPartyLogin(@Body() identity: any, @Req() req: RequestWithSession) {
     // TODO: handle the error case where its not validated
+    Logger.log('here');
     const payload = await this.authService.verifyWithGoogle(identity.credential.oauthIdToken);
 
     req.session.token = identity.credential.oauthIdToken;

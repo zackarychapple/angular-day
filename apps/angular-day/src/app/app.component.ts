@@ -18,6 +18,13 @@ export class AppComponent {
   // THIS WAS A HUGE HELP: https://stackoverflow.com/questions/37344066/firebase-this-domain-is-not-authorized/48475438#48475438
   // https://stackoverflow.com/questions/56196172/error-403-restricted-client-with-google-signin-in-flutter
   constructor(private http: HttpClient, public afAuth: AngularFireAuth, public authService: AuthService) {
+    afAuth.user.subscribe((user: any) => {
+      if (typeof user.email === 'undefined') {
+        this.authService.setUser(user.user);
+      } else {
+        this.authService.setUser(user);
+      }
+    })
   }
 
   async login() {

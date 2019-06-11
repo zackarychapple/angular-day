@@ -1,3 +1,6 @@
-<p>
-  cat-feed works!
-</p>
+<div class="feed-item" *ngFor="let cat of feed">
+  <mat-card>
+    <div>{{cat.owner}}</div>
+    <img class="mat-card-image" [src]="cat.breed.url">
+  </mat-card>
+</div>
