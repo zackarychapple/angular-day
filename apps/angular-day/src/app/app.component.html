@@ -2,8 +2,8 @@
   <h1>Welcome to angular-day... of cats!</h1>
 </div>
 
-<div *ngIf="afAuth.user | async as user; else showLogin">
-  <h1>Hello {{ user.displayName }}!</h1>
+<div *ngIf="user !== ''; else showLogin">
+  <h1>Hello {{ user }}!</h1>
   <a mat-raised-button (click)="logout()">
     Logout
   </a>
@@ -13,7 +13,19 @@
 </div>
 <ng-template #showLogin>
   <p>Please login.</p>
-  <a mat-raised-button (click)="login()" class="login">
+  <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+    <div class="example-container">
+      <mat-form-field>
+        <input matInput placeholder="Username" formControlName="username">
+      </mat-form-field>
+
+      <mat-form-field>
+        <input matInput placeholder="Enter your password" formControlName="password" [type]="'password'">
+      </mat-form-field>
+    </div>
+    <button mat-raised-button type="submit">Submit</button>
+  </form>
+  <a mat-raised-button (click)="loginWithGoogle()" class="login">
     <img src="../assets/google_icon_transparent.png">
     Sign In With Google
   </a>

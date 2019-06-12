@@ -7,7 +7,14 @@ import {BreedListComponent} from './breed-list/breed-list.component';
 import {BreedGridComponent} from './breed-grid/breed-grid.component';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {MatGridListModule} from '@angular/material/grid-list';
-import {MatButtonModule, MatCardModule, MatListModule, MatSelectModule} from '@angular/material';
+import {
+  MatButtonModule,
+  MatCardModule,
+  MatIconModule,
+  MatInputModule,
+  MatListModule,
+  MatSelectModule
+} from '@angular/material';
 import {environment} from '../environments/environment';
 import {AngularFireModule} from '@angular/fire';
 import {AngularFireAuthModule} from '@angular/fire/auth';
@@ -18,13 +25,16 @@ import {AuthService} from './auth.service';
 import {SocketIoModule} from 'ngx-socket-io';
 import { CatFeedComponent } from './cat-feed/cat-feed.component';
 import {CatFeedService} from './cat-feed/cat-feed.service';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 
 const MATERIAL_MODULES = [
   MatGridListModule,
   MatSelectModule,
   MatButtonModule,
   MatCardModule,
-  MatListModule
+  MatListModule,
+  MatIconModule,
+  MatInputModule
 ];
 
 const appRoutes: Routes = [
@@ -40,6 +50,8 @@ const appRoutes: Routes = [
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireAuthModule,
     HttpClientModule,
+    FormsModule,
+    ReactiveFormsModule,
     BrowserAnimationsModule,
     ...MATERIAL_MODULES,
     SocketIoModule.forRoot({

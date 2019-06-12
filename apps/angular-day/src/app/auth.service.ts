@@ -11,8 +11,16 @@ export class AuthService {
   constructor(private http: HttpClient) {
   }
 
-  setUser(user){
-    this.user = user.email;
+  login(auth) {
+    return this.http.post('/api/auth/login', auth)
+  }
+
+  setUser(user) {
+    this.user = user;
+  }
+
+  getUser(){
+    return this.user;
   }
 
   validateAuth(user) {

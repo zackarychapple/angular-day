@@ -1,9 +1,10 @@
-import {Body, Controller, HttpStatus, Logger, Post, Req} from '@nestjs/common';
+import {Body, Controller, HttpStatus, Logger, Post, Req, Res} from '@nestjs/common';
 import {AuthService} from './auth.service';
 import {LoginDto} from '../users/login.dto';
 import {RequestWithSession} from '../common/RequestWithSession';
 import {UsersService} from '../users/users.service';
 import {CreateUserDto} from '../users/user.dto';
+import {Response} from 'express';
 
 @Controller('auth')
 export class AuthController {
@@ -11,16 +12,17 @@ export class AuthController {
   }
 
   @Post('/login')
-  async login(@Body() loginDto: LoginDto, @Req() req: RequestWithSession) {
+  async login(@Body() loginDto: LoginDto, @Req() req: RequestWithSession, @Res() res: Response) {
     const token = await this.authService.signIn(loginDto);
     if (token === this.authService.NOT_AUTHORIZED) {
-      return HttpStatus.UNAUTHORIZED;
+      res.status(HttpStatus.UNAUTHORIZED);
     } else if (token === this.authService.USE_IDENTITY_PROVIDER) {
       // TODO: Make the UI handle this gracefully
-      return HttpStatus.CONFLICT;
+      res.status(HttpStatus.CONFLICT);
     } else {
       req.session.token = token;
-      return token;
+      res.status(HttpStatus.OK);
+      res.send({token: token, username: loginDto.username});
     }
   }
 
