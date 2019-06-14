@@ -55,7 +55,7 @@ async function bootstrap() {
   This is the setup for swagger documentation on our application
   */
   const options = new DocumentBuilder()
-    .setTitle('nestjs ng china Example')
+    .setTitle('nestjs angular day Example')
     .setDescription('Demonstrating that Swagger API documentation can be created from nestJS')
     .setVersion('1.0') // This should pull from package.json
     .build();
