@@ -9,6 +9,7 @@ import {HealthcheckModule} from '../healthcheck/healthcheck.module';
 import {UsersModule} from '../users/users.module';
 import {AuthModule} from '../auth/auth.module';
 import {EventsModule} from '../events/events.module';
+import {FileUploadModule} from '../file-upload/file-upload.module';
 
 @Module({
   imports: [
@@ -17,6 +18,7 @@ import {EventsModule} from '../events/events.module';
     HealthcheckModule,
     EventsModule,
     UsersModule,
+    FileUploadModule,
     AuthModule,
     TypeOrmModule.forRoot({
       // These should be pulled from Env

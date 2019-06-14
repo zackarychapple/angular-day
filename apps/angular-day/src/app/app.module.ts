@@ -23,7 +23,7 @@ import {RouterModule, Routes} from '@angular/router';
 import {HomeComponent} from './home/home.component';
 import {AuthService} from './auth.service';
 import {SocketIoModule} from 'ngx-socket-io';
-import { CatFeedComponent } from './cat-feed/cat-feed.component';
+import {CatFeedComponent} from './cat-feed/cat-feed.component';
 import {CatFeedService} from './cat-feed/cat-feed.service';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 
@@ -39,7 +39,7 @@ const MATERIAL_MODULES = [
 
 const appRoutes: Routes = [
   {path: '', component: HomeComponent},
-  {path: '**', redirectTo: '', pathMatch: 'full' },
+  {path: '**', redirectTo: '', pathMatch: 'full'},
 ];
 
 @NgModule({
@@ -62,5 +62,6 @@ const appRoutes: Routes = [
   bootstrap: [AppComponent]
 })
 export class AppModule {
-  constructor(){}
+  constructor() {
+  }
 }
